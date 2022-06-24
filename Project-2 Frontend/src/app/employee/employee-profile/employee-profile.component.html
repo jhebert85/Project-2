@@ -1,0 +1,28 @@
+<div class="container">
+  <table class="table table-stripped">
+    <thead class="thead-dark myTable">
+      <tr>
+      <tr>
+        <th scope="col">Employee Id</th>
+        <th scope="col">Manager Id</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">UserName</th>
+        <th scope="col">Password</th>
+        <th>Edit</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{empModel.empId}}</td>
+        <td>{{empModel.mgrId}}</td>
+        <td>{{empModel.empFirstName}}</td>
+        <td>{{empModel.empLastName}}</td>
+        <td>{{empModel.empUserName}}</td>
+        <td>{{empModel.empPassword}}</td>
+        <td><button type="button" class="btn btn-primary" (click)="update()">Edit Profile</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+

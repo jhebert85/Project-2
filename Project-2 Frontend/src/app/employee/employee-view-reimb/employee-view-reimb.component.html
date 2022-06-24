@@ -1,0 +1,162 @@
+<div class="container">
+  <div class="row mt-5">
+    <div *ngIf="storeMessage == ''">
+      <h2>Pending Reimbursements</h2>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <td>REIMBURSEMENT ID</td>
+            <td>EMPLOYEE ID</td>
+            <td>MANAGER ID</td>
+            <td>REIMBURSEMENT DESCRIPTION</td>
+            <td>REIMBURSMENT AMOUNT</td>
+            <td>REIMBURSEMENT STATUS</td>
+            <td></td>
+            <td></td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let emplReimb of pendReimb">
+            <td>{{ emplReimb.reimbursementId }}</td>
+            <td>{{ emplReimb.empId }}</td>
+            <td>{{ emplReimb.mgrId }}</td>
+            <td>{{ emplReimb.reimbursementDesc }}</td>
+            <td>${{ emplReimb.reimbursementAmt }}</td>
+            <td>{{ emplReimb.reimbursementStatus }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div *ngIf="storeMessage != ''">
+      <h3 class="text-danger">{{ storeMessage }}</h3>
+    </div>
+    <div class="container">
+      <div class="row mt-5">
+        <div *ngIf="storeMessage1 == ''">
+          <h2>Resolved Reimbursements</h2>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <td>REIMBURSEMENT ID</td>
+                <td>EMPLOYEE ID</td>
+                <td>MANAGER ID</td>
+                <td>REIMBURSEMENT DESCRIPTION</td>
+                <td>REIMBURSMENT AMOUNT</td>
+                <td>REIMBURSEMENT STATUS</td>
+                <td></td>
+                <td></td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let emplReimb of resolvedReimb">
+                <td>{{ emplReimb.reimbursementId }}</td>
+                <td>{{ emplReimb.empId }}</td>
+                <td>{{ emplReimb.mgrId }}</td>
+                <td>{{ emplReimb.reimbursementDesc }}</td>
+                <td>${{ emplReimb.reimbursementAmt }}</td>
+                <td>{{ emplReimb.reimbursementStatus }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div *ngIf="storeMessage1 != ''">
+          <h3 class="text-danger">{{ storeMessage1 }}</h3>
+        </div>
+        <div class="row mt-5">
+          <div class="col-2"></div>
+          <div class="col-8">
+            <button
+              type="button"
+              class="btn btn-success"
+              (click)="displayForm()"
+            >
+              Create A New Request
+            </button>
+            <div *ngIf="shouldDisplay">
+              <div class="container">
+                <form #myForm="ngForm">
+                  <div class="card m-3">
+                    <div class="card-header bg-primary text-light">
+                      REIMBURSEMENT FORM
+                    </div>
+                    <div class="card-body">
+                      <div class="mb-3">
+                        <label for="rDesc" class="form-label"
+                          >Reimbursement Description:</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Enter Reimbursement Description"
+                          name="reimbursementDesc"
+                          [(ngModel)]="newReimb.reimbursementDesc"
+                          #reimbursementDesc="ngModel"
+                          required
+                        />
+                        <div
+                          *ngIf="
+                            !reimbursementDesc.valid &&
+                            reimbursementDesc.touched
+                          "
+                          class="text-danger small"
+                        >
+                          reimbursement description is required!
+                        </div>
+                      </div>
+                      <div class="mb-3">
+                        <label for="rAmt" class="form-label"
+                          >Reimbursement Amount:</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Enter Reimbursement Amount"
+                          name="reimbursementAmt"
+                          [(ngModel)]="newReimb.reimbursementAmt"
+                          #reimbursementAmt="ngModel"
+                          required
+                        />
+                        <div
+                          *ngIf="
+                            !reimbursementAmt.valid && reimbursementAmt.touched
+                          "
+                          class="text-danger small"
+                        >
+                          reimbursement amount is required!
+                        </div>
+                      </div>
+                      <div class="mb-3">
+                        <label for="bImage" class="form-label"
+                          >Reimbursement Status:</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="rStatus"
+                          value="pending"
+                          name="pending"
+                          disabled="true"
+                        />
+                      </div>
+                    </div>
+                    <div class="card-footer bg-primary">
+                      <button
+                        type="button"
+                        class="btn btn-success"
+                        (click)="addReimb()"
+                        [disabled]="!myForm.valid"
+                      >
+                        Submit Reimbursement Request
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
